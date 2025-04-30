@@ -1,0 +1,33 @@
+      <div class="content register">
+        <h1>Rejestracja</h1>
+        <mat-form-field class="rounded-form-field" appearance="outline">
+          <mat-label>Nazwa użykownika</mat-label>
+          <input matInput id="userName" type="text" placeholder="Wybierz nazwę użytkownika"
+                 [(ngModel)]="newUser.username">
+          @if (register().m2 !== "") {
+            <mat-hint>{{ register().m2 }}</mat-hint>
+          }
+        </mat-form-field>
+        <mat-form-field class="rounded-form-field" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" type="text" placeholder="Podaj email" [(ngModel)]="newUser.email">
+        </mat-form-field>
+        <mat-form-field class="rounded-form-field" appearance="outline">
+          <mat-label>Hasło</mat-label>
+          <input matInput id="newPassword" type="password" placeholder="Wybierz hasło" [(ngModel)]="newUser.password">
+          @if (register().m1 !== "") {
+            <mat-hint>{{ register().m1 }}</mat-hint>
+          }
+        </mat-form-field>
+        <mat-form-field class="rounded-form-field" appearance="outline">
+          <mat-label>Powtórz hasło</mat-label>
+          <input matInput id="repeatedPassword" type="password" placeholder="Powtórz hasło" [(ngModel)]="newUser.repeatedPassword">
+          @if (register().m1 !== "") {
+            <mat-hint>{{ register().m1 }}</mat-hint>
+          }
+        </mat-form-field>
+        <div class="buttons">
+          <button mat-flat-button (click)="change()">Zaloguj</button>
+          <button class="login" mat-stroked-button>Wyślij</button>
+        </div>
+      </div>

@@ -29,6 +29,7 @@ h1 {
   gap: 20px;
   justify-content: start;
   align-items: center;
+  height: 100%;
 }
 .register {
 gap: 10px;
@@ -72,4 +73,10 @@ img {
 }
 mat-hint {
   color: red;
+}
+app-login {
+  height: 100%;
+}
+app-register {
+  height: 100%;
 }

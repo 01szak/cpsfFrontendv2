@@ -2,62 +2,9 @@
   <img src="background-cpsf.jpg">
   <mat-card>
     @if (!signUp) {
-      <div class="content">
-        <h1>Login</h1>
-        <mat-form-field appearance="outline" class="rounded-form-field">
-          <mat-label>Login</mat-label>
-          <input matInput id="login" type="text" placeholder="Podaj login" [(ngModel)]="login">
-          @if (!authenticated) {
-            <mat-hint>Login lub hasło są nie poprawne</mat-hint>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="rounded-form-field">
-          <mat-label>Hasło</mat-label>
-          <input matInput id="password" type="password" placeholder="Podaj hasło" [(ngModel)]="password">
-          @if (!authenticated) {
-            <mat-hint>Login lub hasło są nie poprawne</mat-hint>
-          }
-        </mat-form-field>
-      </div>
-      <div class="buttons">
-        <button mat-stroked-button (click)="signUp = true">Zarejestruj</button>
-        <button class="login" mat-flat-button (click)="authenticate()">Zaloguj</button>
-      </div>
+      <app-login (changeTemplate) = changeTemplate($event)></app-login>
     } @else {
-      <div class="content register">
-        <h1>Rejestracja</h1>
-        <mat-form-field class="rounded-form-field" appearance="outline"  >
-          <mat-label>Nazwa użykownika</mat-label>
-          <input matInput id="userName" type="text" placeholder="Wybierz nazwę użytkownika" [(ngModel)]="newUser.username">
-          @if (register().m2 !== "") {
-            <mat-hint>{{ register().m2}}</mat-hint>
-          }
-        </mat-form-field>
-        <mat-form-field class="rounded-form-field" appearance="outline" >
-          <mat-label>Email</mat-label>
-          <input matInput id="email" type="text" placeholder="Podaj email" [(ngModel)]="newUser.email">
-        </mat-form-field>
-        <mat-form-field class="rounded-form-field" appearance="outline" >
-          <mat-label>Hasło</mat-label>
-          <input matInput id="newPassword" type="password" placeholder="Wybierz hasło" [(ngModel)]="newUser.password">
-          @if (register().m1 !== "") {
-            <mat-hint>{{ register().m1}}</mat-hint>
-          }
-        </mat-form-field>
-        <mat-form-field class="rounded-form-field" appearance="outline" >
-          <mat-label>Powtórz hasło</mat-label>
-          <input matInput id="repeatedPassword" type="password" placeholder="Powtórz hasło" [(ngModel)]="newUser.repeatedPassword">
-          @if (register().m1 !== "") {
-            <mat-hint>{{ register().m1}}</mat-hint>
-          }
-        </mat-form-field>
-      </div>
-      <div class="buttons">
-        <button mat-flat-button (click)="this.signUp = false">Sign in</button>
-        <button class="login" mat-stroked-button >Submit</button>
-      </div>
+      <app-register (changeTemplate) = changeTemplate($event)></app-register>
     }
-
   </mat-card>
 </div>

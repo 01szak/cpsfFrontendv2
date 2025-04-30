@@ -1,0 +1,22 @@
+      <div class="content">
+        <h1>Login</h1>
+        <mat-form-field appearance="outline" class="rounded-form-field">
+          <mat-label>Login</mat-label>
+          <input matInput id="login" type="text" placeholder="Podaj login" [(ngModel)]="login">
+          @if (!authenticated) {
+            <mat-hint>Login lub hasło są nie poprawne</mat-hint>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="rounded-form-field">
+          <mat-label>Hasło</mat-label>
+          <input matInput id="password" type="password" placeholder="Podaj hasło" [(ngModel)]="password">
+          @if (!authenticated) {
+            <mat-hint>Login lub hasło są nie poprawne</mat-hint>
+          }
+        </mat-form-field>
+        <div class="buttons">
+          <button mat-stroked-button (click)="change()">Zarejestruj</button>
+          <button class="login" mat-flat-button (click)="authenticate()">Zaloguj</button>
+        </div>
+      </div>
