@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-color-primary: #000000;
+  --bg-color-secondary: rgb(49, 49, 49);
+  --bg-color-tertiary: #010065;
+  --container-blury: rgba(255, 255, 255, 0.8)
+}
+
+.primary {
+  background-color: var(--bg-color-primary);
+}
+
+.secondary {
+  background-color: var(--bg-color-secondary);
+}
+
+.tertiary {
+  background-color: var(--bg-color-tertiary);
+}
+
+.blury {
+  background-color: var(--container-blury);
+}
+
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --mdc-outlined-text-field-container-shape: 30px;
+  /*--mdc-filled-button-container-color:  #010065;*/
+}
+
