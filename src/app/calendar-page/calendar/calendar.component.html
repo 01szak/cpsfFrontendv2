@@ -1,0 +1,49 @@
+<table>
+  @for (day of days; track day) {
+    <th> {{ day }}</th>
+  }
+  <tr>
+    @for (day of days; let i = $index; track i) {
+      @if (firstDayOfTheMonth <= i) {
+        <td>
+          <app-calendar-cell [day]="(i )"></app-calendar-cell>
+        </td>
+      } @else {
+        <td></td>
+      }
+    }
+  </tr>
+  <tr>
+    @for (day of days; let i = $index; track i) {
+      <td>
+        <app-calendar-cell [day]="(i + 7 )"></app-calendar-cell>
+      </td>
+    }
+  </tr>
+  <tr>
+    @for (day of days; let i = $index; track i) {
+      <td>
+        <app-calendar-cell [day]="(i + 7 * 2 )"></app-calendar-cell>
+      </td>
+    }
+  </tr>
+  <tr>
+    @for (day of days; let i = $index; track i) {
+      <td>
+        <app-calendar-cell [day]="(i + 7 * 3 )"></app-calendar-cell>
+      </td>
+    }
+  </tr>
+  <tr>
+    @for (day of days; let i = $index; track i) {
+      @if (lastDayOfTheMonth >= i) {
+        <td>
+          <app-calendar-cell [day]="i + 7 * 4"></app-calendar-cell>
+        </td>
+      } @else {
+        <td></td>
+      }
+
+    }
+  </tr>
+</table>

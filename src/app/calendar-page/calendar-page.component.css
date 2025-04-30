@@ -1,0 +1,17 @@
+.content{
+  display: grid;
+  flex-direction: column;
+  gap: 55px;
+  height: 100%;
+}
+app-calendar {
+  width: 70vw ;
+  height: 65vh;
+}
+app-reservation-panel {
+  align-self: center;
+}
+.calendarAndPanel {
+  display: flex;
+gap: 60px;
+}

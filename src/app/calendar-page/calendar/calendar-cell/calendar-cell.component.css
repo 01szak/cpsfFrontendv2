@@ -1,0 +1,16 @@
+mat-card {
+  height: 100px;
+  border-radius: 30px;
+  border: solid white 2px;
+  flex-shrink: 0;
+}
+mat-card:hover {
+  cursor: pointer;
+  background-color: #292929 !important;
+}
+
+.day {
+  width: 100%;
+  text-align: start;
+  padding: 8px 0 0 20px;
+}

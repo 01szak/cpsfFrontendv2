@@ -23,10 +23,19 @@
 }
 
 
+html, body {
+  height: 100%;
+  background-color: black
+}
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+mat-card {
+  background-color: #202020 !important;
+}
 
 :root {
   --mdc-outlined-text-field-container-shape: 30px;
