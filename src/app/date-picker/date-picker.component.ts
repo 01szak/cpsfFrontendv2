@@ -10,7 +10,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class DatePickerComponent implements OnInit {
   months: string[] = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
   currentMonth: string = this.months[new Date().getMonth()];
-  @Output() month = new EventEmitter<string>();
+  @Output() month = new EventEmitter<number>();
   @Output() year= new EventEmitter<number>();
   yearForTemplate: number = new Date().getFullYear();
   monthForTemplate: string = this.months[new Date().getMonth()]
@@ -27,9 +27,9 @@ export class DatePickerComponent implements OnInit {
       this.year.emit(this.yearForTemplate)
       index = this.months.length;
     }
-    let month = this.months[index - 1];
-    this.currentMonth = month
-    this.monthForTemplate = month;
+    let month = index - 1;
+    this.currentMonth = this.months[month];
+    this.monthForTemplate = this.months[month];
     this.month.emit(month)
   }
 
@@ -40,9 +40,9 @@ export class DatePickerComponent implements OnInit {
       this.year.emit(this.yearForTemplate)
       index = -1
     }
-    let month = this.months[index + 1];
-    this.currentMonth = month;
-    this.monthForTemplate = month;
+    let month = index + 1;
+    this.currentMonth = this.months[month];
+    this.monthForTemplate = this.months[month];
     this.month.emit(month);
   }
 }

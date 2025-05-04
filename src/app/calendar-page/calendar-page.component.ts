@@ -17,12 +17,11 @@ import {DatePickerComponent} from '../date-picker/date-picker.component';
   styleUrl: './calendar-page.component.css'
 })
 export class CalendarPageComponent {
-  months: string[] = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
-  @Input() month: string = this.months[new Date().getMonth()];
-  @Input() year: number = new Date().getFullYear();
+   month: number = new Date().getMonth();
+   year: number = new Date().getFullYear();
 
-  changeMonth(event:string) {
+  changeMonth(event:number) {
   console.log(event)
     this.month = event;
   }
