@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {CalendarCellComponent} from './calendar-cell/calendar-cell.component';
 
@@ -25,7 +25,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
    if (changes["month"] || changes["year"]) {
      this.generateDays();
-  }
+    }
   }
 
   generateDays() {
@@ -41,8 +41,12 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.days.push(i);
     }
   }
+  setDate(day:number) {
+    return new Date(this.year, this.month,day);
+  }
 
   protected readonly Array = Array;
   protected readonly Math = Math;
+  protected readonly Date = Date;
 }
 

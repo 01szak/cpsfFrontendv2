@@ -1,1 +1,5 @@
-<mat-card></mat-card>
+<mat-card>
+  @for (reservation of reservations;track reservation) {
+    <app-reservation-cell [reservation]="reservation"></app-reservation-cell>
+  }
+</mat-card>

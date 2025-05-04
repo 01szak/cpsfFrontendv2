@@ -10,7 +10,7 @@
       @for (day of days.slice(i * 7, i * 7 + 7); track day) {
         <td>
           @if (day) {
-            <app-calendar-cell [day]="day"></app-calendar-cell>
+            <app-calendar-cell [date]="setDate(day)"></app-calendar-cell>
           }
         </td>
       }

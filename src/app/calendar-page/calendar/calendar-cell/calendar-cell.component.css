@@ -14,3 +14,9 @@ mat-card:hover {
   text-align: start;
   padding: 8px 0 0 20px;
 }
+.checkin {
+  background-color: blue !important;
+}
+.checkin:hover {
+  background-color: #2d2dfb !important;
+}
