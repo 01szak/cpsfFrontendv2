@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {CalendarCellComponent} from './calendar-cell/calendar-cell.component';
 
@@ -18,7 +18,6 @@ export class CalendarComponent implements OnInit, OnChanges {
   days: (number | null)[] = [];
   @Input() month: number = new Date().getMonth();
   @Input() year: number = new Date().getFullYear();
-
   ngOnInit(): void {
     this.generateDays()
   }
@@ -26,7 +25,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
    if (changes["month"] || changes["year"]) {
      this.generateDays();
-   }
+  }
   }
 
   generateDays() {
@@ -41,31 +40,9 @@ export class CalendarComponent implements OnInit, OnChanges {
     for (let i = 1; i <= daysInMonth; i++) {
       this.days.push(i);
     }
-
   }
-
-  // setFirstRow() {
-  //   const today = new Date();
-  //   this.firstDayOfTheMonth = new Date(today.setDate(1)).getDay() - 3 ;
-  //   this.firstDayOfTheMonth = this.firstDayOfTheMonth === -1 ? this.firstDayOfTheMonth = 6 : this.firstDayOfTheMonth;
-  // }
-  // setCellAmount() {
-  //   const today = new Date();
-  //   let finalDayOfTheMonth= new Date(today.getFullYear(), today.getMonth() + 1, 0).getDay() - 4 ;
-  //   for (let i = 1; i <= finalDayOfTheMonth ; i++) {
-  //     this.days.push(i);
-  //   }
-  // }
-  // trackWeekDays(day:number) {
-  //    const jsDay =   new Date(this.year,this.month,day).getDay();
-  //    return jsDay === 0 ? 6 : jsDay - 1;
-  // }
-  // setLastRow() {
-  //   const today = new Date();
-  //   this.lastDayOfTheMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDay() - 4 ;
-  //   this.lastDayOfTheMonth = this.lastDayOfTheMonth === -1 ? this.lastDayOfTheMonth = 6 : this.lastDayOfTheMonth;
-  // }
 
   protected readonly Array = Array;
   protected readonly Math = Math;
 }
+

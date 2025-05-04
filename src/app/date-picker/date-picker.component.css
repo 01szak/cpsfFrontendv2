@@ -1,9 +1,10 @@
 .content {
   display: flex;
-  gap: 15px;
+  gap: 50px;
   color: white;
   font-size: x-large;
-  margin-left: 30px;
+  justify-content: start;
+  margin-left: 50px ;
 }
 .arrow {
   background-color: inherit;
@@ -13,8 +14,14 @@
 }
 .arrow:hover {
   cursor: pointer;
+  color: #ccc;
 }
 
 i {
   font-size: x-large;
+}
+p {
+  white-space: nowrap;
+  width: 200px;
+  text-align: center;
 }

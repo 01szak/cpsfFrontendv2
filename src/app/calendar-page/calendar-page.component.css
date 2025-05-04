@@ -4,6 +4,7 @@
   grid-template-rows: repeat(8, minmax(0, 1fr));
   gap: 55px;
   height: 100%;
+  margin-left: 20px;
 }
 
 app-calendar {
@@ -28,6 +29,7 @@ app-date-picker {
   grid-row-end: 2;
   grid-column-start: 1;
   grid-column-end: 3;
-  height: 100%;
-  border: solid red 2px
+  border: inset black 3px;
+  border-radius: 30px;
+  background-color: #202020;
 }
