@@ -1,3 +1,20 @@
 .content {
+  display: flex;
+  gap: 15px;
   color: white;
+  font-size: x-large;
+  margin-left: 30px;
+}
+.arrow {
+  background-color: inherit;
+  border: inherit;
+  color: white;
+  padding: 0;
+}
+.arrow:hover {
+  cursor: pointer;
+}
+
+i {
+  font-size: x-large;
 }

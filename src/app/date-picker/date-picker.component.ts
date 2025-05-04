@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -7,6 +7,42 @@ import { Component } from '@angular/core';
   standalone: true,
   styleUrl: './date-picker.component.css'
 })
-export class DatePickerComponent {
+export class DatePickerComponent implements OnInit {
+  months: string[] = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
+  currentMonth: string = this.months[new Date().getMonth()];
+  @Output() month = new EventEmitter<string>();
+  @Output() year= new EventEmitter<number>();
+  yearForTemplate: number = new Date().getFullYear();
+  monthForTemplate: string = this.months[new Date().getMonth()]
 
+  ngOnInit(): void {
+
+  }
+
+
+  decreaseMonth() {
+    let index = this.months.indexOf(this.currentMonth);
+    if (index < 1) {
+    this.yearForTemplate --;
+      this.year.emit(this.yearForTemplate)
+      index = this.months.length;
+    }
+    let month = this.months[index - 1];
+    this.currentMonth = month
+    this.monthForTemplate = month;
+    this.month.emit(month)
+  }
+
+  increaseMonth() {
+    let index = this.months.indexOf(this.currentMonth);
+    if (index >= this.months.length - 1) {
+      this.yearForTemplate ++;
+      this.year.emit(this.yearForTemplate)
+      index = -1
+    }
+    let month = this.months[index + 1];
+    this.currentMonth = month;
+    this.monthForTemplate = month;
+    this.month.emit(month);
+  }
 }
