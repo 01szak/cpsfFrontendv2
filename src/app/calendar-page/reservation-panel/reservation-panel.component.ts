@@ -24,8 +24,7 @@ constructor(private service:DataSharingService) {}
 
   receiveDataFromCalendarCell() {
   this.service.data$.subscribe(data => {
-    this.reservations.push(data)
-      console.log(this.reservations)
+    this.reservations = data;
   })
 
   }

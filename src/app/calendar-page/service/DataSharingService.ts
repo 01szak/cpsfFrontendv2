@@ -4,11 +4,11 @@ import {Subject} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataSharingService {
- dataSubject = new Subject<Reservation>();
+ dataSubject = new Subject<Reservation[]>();
  data$  = this.dataSubject.asObservable();
 
- sendReservation(reservation: Reservation) {
-   this.dataSubject.next(reservation);
+ sendReservations(reservations: Reservation[]) {
+   this.dataSubject.next(reservations);
  }
 }
 

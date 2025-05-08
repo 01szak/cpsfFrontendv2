@@ -1,0 +1,45 @@
+<div class="outer">
+  @if (!(reservation.note === "")) {
+    <i class="fa-regular fa-note-sticky"></i>
+  }
+  @if (!reservation.isPaid) {
+    <i class="fa-solid fa-exclamation"></i>
+  }
+</div>
+
+  <div class="card">
+    <div class="data">
+      <mat-card>
+        <strong>{{ reservation.camperPlace.index }}</strong>
+      </mat-card>
+      <mat-card>
+        {{ formatData() }}
+      </mat-card>
+      <mat-card>
+        {{ reservation.guest.firstname + " " + reservation.guest.lastname }}
+      </mat-card>
+      <mat-card>
+        {{ reservation.price }}zł
+      </mat-card>
+    </div>
+
+    @if (showMore) {
+      <p class="note">{{ reservation.note }}</p>
+    }
+    <div class="checkboxes">
+      <div>
+        <mat-checkbox [(ngModel)]="reservation.isChecked"><span>zakwaterowane</span></mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox  [(ngModel)]="reservation.isPaid"><span>zapłacone</span></mat-checkbox>
+      </div>
+      @if (!showMore) {
+        <button class="showNote" (click)="showMore = true">więcej</button>
+      } @else {
+        <button class="showNote" (click)="showMore = false">mniej</button>
+
+      }
+    </div>
+
+
+  </div>

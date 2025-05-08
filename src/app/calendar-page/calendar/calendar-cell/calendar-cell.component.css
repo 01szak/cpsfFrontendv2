@@ -1,4 +1,5 @@
 mat-card {
+  display: flex;
   height: 100px;
   border-radius: 30px;
   border: solid white 2px;
@@ -19,4 +20,11 @@ mat-card:hover {
 }
 .checkin:hover {
   background-color: #2d2dfb !important;
+}
+.fa-solid.fa-exclamation {
+  color: #dd0000 !important;
+}
+.exclamation {
+  width: 100%;
+
 }

@@ -1,5 +1,12 @@
 <mat-card [ngClass]="{checkin:checkCheckins()}" (click)="sendDataToReservationPanel()">
   <div class="day">
-    {{date.getDate()}}
+    {{ date.getDate() }}
+  </div>
+  <div>
+    @if (checkPayment()) {
+      <div class="exclamation">
+        <i class="fa-solid fa-exclamation"></i>
+      </div>
+    }
   </div>
 </mat-card>
