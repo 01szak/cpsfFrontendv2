@@ -10,7 +10,6 @@ import {FormsModule} from '@angular/forms';
   imports: [
     MatCard,
     MatCheckbox,
-    NgClass,
     FormsModule
   ],
   templateUrl: './reservation-card.component.html',
@@ -21,7 +20,7 @@ export class ReservationCardComponent {
   @Input() reservation!: Reservation;
   showMore: boolean = false;
 
-  formatData() {
+  formatData(date:Date) {
     function translate(month: string) {
       switch (month) {
         case "Jan":
@@ -52,7 +51,6 @@ export class ReservationCardComponent {
           return month;
       }
     }
-
     const formattedDate = (date: Date) => {
       const dateStr = date.toDateString();
       const dateParts = dateStr.split(" ");
@@ -61,10 +59,8 @@ export class ReservationCardComponent {
       const translatedMonth = translate(month);
       return day + " " + translatedMonth;
     }
-    const formattedCheckin = formattedDate(this.reservation.checkin);
-    const formattedCheckout = formattedDate(this.reservation.checkout);
+     return  formattedDate(date);
 
-    return "od: " + formattedCheckin + " / " + "do: " + formattedCheckout;
   }
 
 }

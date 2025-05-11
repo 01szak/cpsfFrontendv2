@@ -7,7 +7,6 @@ import {DatePickerComponent} from '../date-picker/date-picker.component';
 @Component({
   selector: 'app-calendar-page',
   imports: [
-    MatCard,
     CalendarComponent,
     ReservationPanelComponent,
     DatePickerComponent

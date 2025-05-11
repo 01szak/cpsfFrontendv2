@@ -18,17 +18,17 @@ export class CalendarCellComponent {
   @Input() date!: Date;
   reservations: Reservation[] =
     [
-      {checkin: new Date(2025,4,5), checkout: new Date(2025,4,10), guest: {firstname:'John',lastname:'Doe'},camperPlace: {index:"10a"} ,isChecked: true, isPaid: false, note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', price: 0}];
+      {checkin: new Date(2025,4,5), checkout: new Date(2025,4,10), guest: {firstname:'John',lastname:'Doe'},camperPlace: {index:"10a"} ,isChecked: true, isPaid: false, note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', price: 0}
+    ];
   constructor(private service:DataSharingService) {}
   checkCheckins () {
     return this.reservations.some(r => r.checkin.valueOf() === this.date.valueOf());
   }
   sendDataToReservationPanel() {
-    console.log("data send: " + this.reservations)
     this.service.sendReservations(this.reservations);
   }
   checkPayment () {
-    return this.reservations.some(r => !r.isPaid);
+    return this.reservations.some(r => !r.isPaid) && this.date.valueOf() === this.reservations[0].checkin.valueOf();
   }
   protected readonly console = console;
 

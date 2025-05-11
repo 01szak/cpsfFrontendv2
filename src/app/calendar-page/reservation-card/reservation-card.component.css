@@ -1,37 +1,41 @@
 .card {
   display: flex;
   flex-direction: column;
-  border: solid white 2px;
+  border: solid white 1px;
   padding: 12px;
   gap: 10px;
   border-radius: 15px;
+  flex-shrink: initial;
+
 }
+
 .data {
   display: flex;
   flex-direction: row;
   gap: 20px;
+
+
 }
+
 mat-card {
-border-radius: 30px;
+  flex: 1 1 0;
+  border-radius: 30px;
   background-color: #313131 !important;
   padding: 12px;
-  width: fit-content;
+  min-width: 0;
+  font-size: small;
+  text-align: center;
 }
+
 span {
   color: white;
 }
 
-.noteSection {
-  width: 100%;
-  overflow-block: hidden;
-  text-align: start;
-  padding: 0 15px 0 15px;
-  margin: 0;
 
-}
 p {
   width: 100%;
-  }
+}
+
 .cutHeight {
   max-height: 50px;
 }
@@ -43,8 +47,9 @@ p {
   border: none;
   color: deepskyblue;
 }
+
 .showNote:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .checkboxes {
@@ -52,20 +57,33 @@ p {
   display: flex;
   align-items: end;
 }
+
 .fa-regular.fa-note-sticky {
   color: #c0c003 !important;
 }
+
 .fa-solid.fa-exclamation {
   color: #dd0000 !important;
 }
+.cpIndex {
+  background-color: inherit !important;
+  align-self: center;
+}
+
 .note {
   width: 100%;
   height: fit-content;
 }
+
 .outer {
   display: flex;
-  justify-items:start;
+  justify-items: start;
   margin-bottom: 2px;
   margin-left: 5px;
   gap: 10px
+}
+
+.checkboxes .note {
+  flex: 1 1 0;
+  min-width: 0;
 }
