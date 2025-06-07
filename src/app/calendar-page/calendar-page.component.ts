@@ -8,7 +8,6 @@ import {NgClass} from '@angular/common';
 @Component({
   selector: 'app-calendar-page',
   imports: [
-    MatCard,
     CalendarComponent,
     ReservationPanelComponent,
     DatePickerComponent,

@@ -5,6 +5,7 @@ mat-card {
   border: solid white 2px;
   max-width: 220px;
   flex-shrink: 0;
+  gap: 10px;
 }
 mat-card:hover {
   cursor: pointer;
@@ -24,6 +25,11 @@ mat-card:hover {
 }
 .fa-solid.fa-exclamation {
   color: #dd0000 !important;
+
+}
+i {
+  font-size: x-large;
+
 }
 .exclamation {
   width: 100%;
