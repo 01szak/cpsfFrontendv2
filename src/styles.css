@@ -1,42 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --bg-color-primary: #000000;
+  --bg-color-primary: #efefef;
   --bg-color-secondary: rgb(49, 49, 49);
   --bg-color-tertiary: #010065;
   --container-blury: rgba(255, 255, 255, 0.8)
 }
 
 .primary {
-  background-color: var(--bg-color-primary);
+  background-color: var(--bg-color-primary) !important;
 }
 
 .secondary {
-  background-color: var(--bg-color-secondary);
+  background-color: var(--bg-color-secondary) !important;
 }
 
 .tertiary {
-  background-color: var(--bg-color-tertiary);
+  background-color: var(--bg-color-tertiary) !important;
 }
 
 .blury {
-  background-color: var(--container-blury);
+  background-color: var(--container-blury) !important;
 }
 
 
 html, body {
   height: 100%;
-  background-color: black
+  background-color: var(--bg-color-primary);
 }
+
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
-mat-card {
-  background-color: #202020 !important;
-}
-
 :root {
   --mdc-outlined-text-field-container-shape: 30px;
   /*--mdc-filled-button-container-color:  #010065;*/

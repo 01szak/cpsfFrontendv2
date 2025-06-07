@@ -1,10 +1,22 @@
 mat-card {
   display: flex;
-  width: 28vw;
+  width: 25vw;
   height: 95vh;
-  margin-right: 30px;
   padding: 40px 30px 40px 30px;
   gap: 20px;
-  color: white;
   overflow-y: scroll;
+  justify-self: end;
+  align-self: end;
+  margin-right: 10px;
+}
+
+i {
+  align-self: end;
+  font-size: large;
+  position: sticky;
+  top: 5px;
+  right: 0;
+}
+i:hover{
+  cursor: pointer;
 }

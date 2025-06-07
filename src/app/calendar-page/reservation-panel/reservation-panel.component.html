@@ -1,5 +1,8 @@
-<mat-card>
-  @for (reservation of reservations;track reservation) {
-    <app-reservation-cell [reservation]="reservation"></app-reservation-cell>
-  }
-</mat-card>
+@if (reservations.length > 0) {
+  <mat-card class="blury">
+    <i (click)="reservations = []" class="fa-solid fa-xmark"></i>
+    @for (reservation of reservations;track reservation) {
+      <app-reservation-cell [reservation]="reservation"></app-reservation-cell>
+    }
+  </mat-card>
+} 

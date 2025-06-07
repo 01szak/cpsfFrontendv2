@@ -1,8 +1,6 @@
 table {
   width: 100%;
   height: 100%;
-  color: white;
-  border-spacing: 5px;
 }
 th {
   width: calc(100% / 7);

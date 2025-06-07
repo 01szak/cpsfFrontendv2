@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatCard} from '@angular/material/card';
 import {DataSharingService} from '../service/DataSharingService';
 import {Reservation} from '../../interfaces/Reservation';
-import {ReservationCardComponent} from '../reservation-card/reservation-card.component';
+import {ReservationCardComponent} from './reservation-card/reservation-card.component';
 
 @Component({
   selector: 'app-reservation-panel',

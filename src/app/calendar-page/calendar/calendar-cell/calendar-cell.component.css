@@ -3,6 +3,7 @@ mat-card {
   height: 100px;
   border-radius: 30px;
   border: solid white 2px;
+  max-width: 220px;
   flex-shrink: 0;
 }
 mat-card:hover {

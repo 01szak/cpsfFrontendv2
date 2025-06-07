@@ -1,5 +1,6 @@
 <div class="content">
+
   <app-date-picker (month)="changeMonth($event)" (year)="changeYear($event)" ></app-date-picker>
-  <app-reservation-panel></app-reservation-panel>
-  <app-calendar [month]="month"  [year]="year"></app-calendar>
+  <app-reservation-panel ></app-reservation-panel>
+  <app-calendar [ngClass]="isPanelVisible  ? 'withResPanel' : 'whenNoResPanel'" [month]="month"  [year]="year"></app-calendar>
 </div>

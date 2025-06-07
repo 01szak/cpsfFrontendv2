@@ -6,20 +6,19 @@
   gap: 10px;
   border-radius: 15px;
 }
+
 .data {
   display: flex;
   flex-direction: row;
   gap: 20px;
 }
+
 mat-card {
-border-radius: 30px;
-  background-color: #313131 !important;
-  padding: 12px;
-  width: fit-content;
+  border-radius: 30px;
+  padding: 18px;
+  width: 100%;
 }
-span {
-  color: white;
-}
+
 
 .noteSection {
   width: 100%;
@@ -29,9 +28,9 @@ span {
   margin: 0;
 
 }
-p {
-  width: 100%;
-  }
+
+
+
 .cutHeight {
   max-height: 50px;
 }
@@ -43,29 +42,70 @@ p {
   border: none;
   color: deepskyblue;
 }
+
 .showNote:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.checkboxes {
-  width: 100%;
-  display: flex;
-  align-items: end;
-}
+
 .fa-regular.fa-note-sticky {
   color: #c0c003 !important;
 }
+
 .fa-solid.fa-exclamation {
   color: #dd0000 !important;
 }
+
 .note {
   width: 100%;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-bottom: none !important;
+  margin-top: 2px;
 }
+
 .outer {
   display: flex;
-  justify-items:start;
+  justify-items: start;
   margin-bottom: 2px;
   margin-left: 5px;
   gap: 10px
+}
+
+.resData {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid black 1px;
+  padding: 4px;
+  width: 100%;
+  gap: 60%
+}
+
+.date {
+  gap: 38%;
+}
+
+p {
+  margin: 0;
+}
+.textNote {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.textNote:hover {
+  cursor: pointer;
+}
+.showMore {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  max-height: none;
+}
+.checkboxes {
+  display: flex;
+  justify-content: start;
+  gap:10%;
 }

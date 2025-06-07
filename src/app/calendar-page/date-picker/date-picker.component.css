@@ -1,0 +1,32 @@
+.content {
+  display: flex;
+  gap: 5px;
+  font-size: large;
+  margin-left: 50px;
+  width: 100%;
+  max-width: 300px;
+  border: solid black 1px;
+  justify-content: space-evenly;
+  border-radius: 30px;
+}
+.arrow {
+  border: none;
+  padding: 0;
+  background-color: inherit;
+  max-height: 30px;
+  align-self: center;
+}
+.arrow:hover {
+  cursor: pointer;
+  color: var(--bg-color-secondary);
+}
+
+i {
+  font-size: x-large;
+}
+p {
+  white-space: nowrap;
+  width: 200px;
+  text-align: center;
+}
+

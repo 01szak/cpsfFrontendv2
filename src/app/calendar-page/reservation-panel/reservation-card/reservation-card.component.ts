@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Reservation} from '../../interfaces/Reservation';
+import {Reservation} from '../../../interfaces/Reservation';
 import {MatCard} from '@angular/material/card';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {NgClass} from '@angular/common';
@@ -64,7 +64,7 @@ export class ReservationCardComponent {
     const formattedCheckin = formattedDate(this.reservation.checkin);
     const formattedCheckout = formattedDate(this.reservation.checkout);
 
-    return "od: " + formattedCheckin + " / " + "do: " + formattedCheckout;
+    return formattedCheckin + " - " + formattedCheckout;
   }
 
 }
