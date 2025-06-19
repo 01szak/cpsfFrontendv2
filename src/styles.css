@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --bg-color-primary: #efefef;
-  --bg-color-secondary: rgb(49, 49, 49);
-  --bg-color-tertiary: #010065;
+  --bg-color-primary: #F5F5F5;
+  --bg-color-secondary: #FFFFFF;
+  --bg-color-tertiary: #3B82F6;
   --container-blury: rgba(255, 255, 255, 0.8)
 }
 
@@ -31,7 +31,8 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: sans-serif;
+  overflow: hidden;
 }
 :root {
   --mdc-outlined-text-field-container-shape: 30px;

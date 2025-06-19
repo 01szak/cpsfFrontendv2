@@ -1,13 +1,11 @@
 .content {
   display: flex;
-  gap: 5px;
-  font-size: large;
-  margin-left: 50px;
   width: 100%;
   max-width: 300px;
-  border: solid black 1px;
   justify-content: space-evenly;
   border-radius: 30px;
+  font-size: small;
+  gap: 2px
 }
 .arrow {
   border: none;
@@ -20,13 +18,18 @@
   cursor: pointer;
   color: var(--bg-color-secondary);
 }
-
 i {
-  font-size: x-large;
+  font-size: x-small;
 }
 p {
-  white-space: nowrap;
-  width: 200px;
-  text-align: center;
+  margin: 0;
 }
-
+mat-card {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  align-content: center;
+  padding: 10px 15px 10px 15px;
+  width: 100%;
+  max-width: 130px;
+}

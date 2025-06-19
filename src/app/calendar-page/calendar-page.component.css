@@ -1,10 +1,19 @@
 .content {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(10, minmax(0, 1fr));
   grid-template-rows: repeat(10, minmax(0, 1fr));
   gap: 55px;
-  height: 100%;
-  margin-left: 20px;
+  width: 100%;
+  max-width: 82vw;
+  height: 100vh;
+}
+app-calendar {
+  grid-row-start: 3;
+  grid-row-end: 10;
+  grid-column-start: 1;
+  grid-column-end: 9;
+  margin: 30px;
+  justify-self: center;
 }
 
 .whenNoResPanel {
