@@ -1,0 +1,18 @@
+<mat-drawer-container [hasBackdrop]="false">
+  <mat-drawer class="shadow" #drawer mode="side">
+    <div class="drawerContent secondary ">
+      @if (isOpen) {
+        <i class="fa-solid fa-bars" (click)="changeIsOpen()" ></i>
+      }
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="primary">
+    @if (!isOpen) {
+      <i class="fa-solid fa-bars" (click)="changeIsOpen()" ></i>
+    } @else {
+<!--      workaround, ill switch it to layout options-->
+      <i class="fa-solid fa-bars" style="color: var(--bg-color-primary)"></i>
+    }
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

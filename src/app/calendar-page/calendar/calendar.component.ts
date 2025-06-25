@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatTable} from '@angular/material/table';
 import {Observable} from 'rxjs';
 import {CamperPlace} from '../../interface/CamperPlace';
@@ -10,7 +10,6 @@ import {DatePickerComponent} from '../date-picker/date-picker.component';
 @Component({
   selector: 'app-calendar',
   imports: [
-    MatTable,
     AsyncPipe,
     MatCard,
     DatePickerComponent

@@ -9,17 +9,17 @@
 .primary {
   background-color: var(--bg-color-primary) !important;
 }
-
 .secondary {
   background-color: var(--bg-color-secondary) !important;
 }
-
 .tertiary {
   background-color: var(--bg-color-tertiary) !important;
 }
-
 .blury {
   background-color: var(--container-blury) !important;
+}
+.shadow {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
 

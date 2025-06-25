@@ -1,0 +1,14 @@
+.drawerContent {
+  height: 100vh;
+  width: 100%;
+}
+i {
+  padding: 10px;
+  font-size: x-large;
+}
+i:hover {
+  cursor: pointer;
+}
+mat-drawer-container {
+  height: 100vh;
+}

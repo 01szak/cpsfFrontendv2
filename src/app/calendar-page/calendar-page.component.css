@@ -1,48 +1,19 @@
+mat-grid-list {
+  height: 100% !important;
+}
 .content {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  grid-template-rows: repeat(10, minmax(0, 1fr));
-  gap: 55px;
-  width: 100%;
-  max-width: 82vw;
-  height: 100vh;
+  height: 100%;
 }
-app-calendar {
-  grid-row-start: 3;
-  grid-row-end: 10;
-  grid-column-start: 1;
-  grid-column-end: 9;
-  margin: 30px;
+.singleCalendar {
+  display: flex;
   justify-self: center;
+  height: 90%;
+  width: 90%;
+}
+mat-grid-tile {
+  margin-left: 10px;
 }
 
-.whenNoResPanel {
-  align-self: start;
-  grid-row-start: 3;
-  grid-row-end: 7;
-  grid-column-start: 1;
-  grid-column-end: 7;
-}
-
-.withResPanel {
-  grid-row-start: 3;
-  grid-row-end: 8;
-  grid-column-start: 1;
-  grid-column-end: 5;
-}
-app-reservation-panel {
-  align-self: start;
-  margin-top: 20px;
-  grid-row-start: 1;
-  grid-row-end: 4;
-  grid-column-start: 6;
-  grid-column-end: 6;
-}
-
-
-app-date-picker {
-  grid-row-start: 2;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
+app-calendar {
+  height: 100%;
 }

@@ -1,6 +1,16 @@
-<div class="content">
+  <mat-grid-list class="primary"  cols="10" rowHeight="100px" gutterSize="20px">
 
-<!--  <app-date-picker (month)="changeMonth($event)" (year)="changeYear($event)"></app-date-picker>-->
-  <app-calendar></app-calendar>
+    <mat-grid-tile class="shadow" colspan="8" rowspan="7">
+      <app-calendar></app-calendar>
+    </mat-grid-tile>
 
-</div>
+    <mat-grid-tile class="shadow" colspan="2" rowspan="3">
+      <app-calendar></app-calendar>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="shadow" colspan="2" rowspan="3">
+      <app-calendar></app-calendar>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
