@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, take} from 'rxjs';
 import {Reservation} from '../interface/Reservation';
 
 @Injectable({providedIn: "root"})
-export  class  ReservationService {
+export class ReservationService {
 
+  reservationMap = new Map<string,Set<string>>;
   api = '/api/reservations/'
 
   constructor(private http: HttpClient) {}
@@ -13,4 +14,5 @@ export  class  ReservationService {
   getReservations(): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(this.api + 'getAll');
   }
+
 }

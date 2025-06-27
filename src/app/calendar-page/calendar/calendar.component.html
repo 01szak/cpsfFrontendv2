@@ -18,7 +18,10 @@
             <th>{{camperPlace.index}}</th>
             @for (day of days; track day) {
               <td>
-                <div class="data">
+                <div [ngClass]="{
+                'data': true,
+                'reserved': isDayReserved(year, month, day, camperPlace)
+                }" >
                   <div class="cell left"></div>
                   <div class="cell right"></div>
                 </div>
