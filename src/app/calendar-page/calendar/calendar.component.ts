@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import {Observable} from 'rxjs';
 import {CamperPlace} from '../../interface/CamperPlace';
 import {CamperPlaceService} from '../../service/CamperPlaceService';
@@ -21,7 +29,7 @@ import {PopupFormService} from '../../service/PopupFormService';
   styleUrl: './calendar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
   weekDays: string[] = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
   days: (number)[] = [];
   @Input() month: number = new Date().getMonth();
@@ -33,6 +41,7 @@ export class CalendarComponent implements OnInit {
     private camperPlaceService: CamperPlaceService,
     private rHelper: ReservationHelper,
     protected popupFormService: PopupFormService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.camperPlaces$ = this.camperPlaceService.getCamperPlaces();
   }
@@ -41,11 +50,17 @@ export class CalendarComponent implements OnInit {
     this.generateDays()
 
     this.rHelper.reservationMap$.subscribe(rm => {
-      this.reservationMap = rm;
+      this.reservationMap = new Map(rm);
     });
-
-    console.log(this.reservationMap)
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const value = changes['reservationMap'];
+    if (value.currentValue) {
+
+    }
+  }
+
   changeMonth(event:number) {
     this.month = event;
     this.generateDays()

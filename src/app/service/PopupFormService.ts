@@ -4,35 +4,31 @@ import {FormData, PopupFormComponent} from '../popup-form/popup-form.component';
 import {MatDialog} from '@angular/material/dialog';
 import {PopupConfirmationService} from './PopupConfirmationService';
 import {ReservationService} from './ReservationService';
+import {UserService} from './UserService';
+import {Observable} from 'rxjs';
+import {User} from '../interface/User';
 
 @Injectable({providedIn: "root"})
 export class PopupFormService {
   readonly popupForm: MatDialog = inject(MatDialog);
+  users$: Observable<User[]>;
   constructor(
     private popupConfirmationService: PopupConfirmationService,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private userService: UserService,
     ) {
+    this.users$ = this.userService.getUsers()
   }
   openCreateReservationFormPopup(year?: number, month?: number, day?: number, camperPlaceIndex?: string) {
-    const reservation: Reservation = {
-      checkin: new Date(year || 0, month || 0, day || 0),
-      checkout: new Date(),
-      guestFirstName: '',
-      guestLastName: '',
-      camperPlaceIndex: '',
-      price: 0,
-      isPaid: false,
-    }
     const checkinDefaultDate = (year == undefined || month == undefined || day == undefined) ? undefined : new Date(year, month, day);
     const formData: FormData = {
-      header: 'Create Reservation',
+      header: 'Nowa rezerwacja',
       formInputs: [
-        { name: 'Checkin', field: 'checkin', type: 'date', defaultValue: checkinDefaultDate, readonly: checkinDefaultDate instanceof Date},
-        { name: 'Checkout', field: 'checkout', type: 'date'},
-        { name: 'Guest First Name', field: 'guestFirstName', type: 'text'},
-        { name: 'Guest Last Name', field: 'guestLastName', type: 'text'},
-        { name: 'Camper Place', field: 'camperPlaceIndex', type: 'text', defaultValue: camperPlaceIndex, readonly: typeof camperPlaceIndex === 'string' && camperPlaceIndex.length > 0},
-        // { name: 'Is Paid', field: 'isPaid', type: 'checkbox'},
+        { name: 'Data wjazdu', field: 'checkin', type: 'date', defaultValue: checkinDefaultDate, readonly: checkinDefaultDate instanceof Date},
+        { name: 'Data wyjazdu', field: 'checkout', type: 'date'},
+        { name: 'Numer parceli', field: 'camperPlaceIndex', type: 'text', defaultValue: camperPlaceIndex, readonly: typeof camperPlaceIndex === 'string' && camperPlaceIndex.length > 0},
+        { name: 'Gość', field: 'user', type: 'text', select: true, selectList: this.users$},
+        { name: 'Zapłacone', field: 'isPaid', type: 'checkbox', checkbox: true},
       ]
     };
     const dialogRef = this.popupForm.open(PopupFormComponent, {
@@ -46,7 +42,28 @@ export class PopupFormService {
           "Rezerwacja zostanie dodana. Czy chcesz kontynuować?",
 
           () => {
-            this.reservationService.createReservation(result);
+            const userToCreate: User = {
+              firstName: result['user'].firstName,
+              lastName: result['user'].lastName,
+              carRegistration: result['user'].carRegistration,
+              streetAddress: result['user'].sreetAdress,
+              city: result['user'].city,
+              country: result['user'].country,
+              email: result['user'].email,
+              phoneNumber: result['user'].phoneNumber,
+
+
+            }
+            const reservationToCreate: Reservation = {
+              camperPlaceIndex: result['camperPlaceIndex'].toString(),
+              checkin: result['checkin'].toString(),
+              checkout: result['checkout'].toString(),
+              isPaid: !!result['isPaid'],
+              price: 0,
+              user: result['user'],
+            }
+
+            this.reservationService.createReservation(reservationToCreate);
             dialogRef.close();
           }
         );

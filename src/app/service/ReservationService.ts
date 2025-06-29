@@ -6,8 +6,7 @@ import {Reservation} from '../interface/Reservation';
 @Injectable({providedIn: "root"})
 export class ReservationService {
 
-  reservationMap = new Map<string,Set<string>>;
-  api = '/api/reservations/'
+  readonly api = '/api/reservations/'
 
   constructor(private http: HttpClient) {}
 
@@ -15,7 +14,10 @@ export class ReservationService {
     return this.http.get<Reservation[]>(this.api + 'getAll');
   }
 
-  createReservation(result: any) {
-      console.log("dodalem rezerwacje")
+  createReservation(reservation: Reservation) {
+    return this.http.post<Reservation>(this.api + 'createReservation', reservation).subscribe(() => {
+      window.location.reload();
+    }
+    );
   }
 }

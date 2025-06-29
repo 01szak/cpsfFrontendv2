@@ -1,8 +1,18 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, input, Input, OnInit} from '@angular/core';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogContent, MatDialogRef, MatDialogTitle} from '@angular/material/dialog';
 import {FormButtonsComponent} from '../form-buttons/form-buttons.component';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {
+  MatAutocomplete,
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteTrigger,
+  MatOption
+} from '@angular/material/autocomplete';
+import {AsyncPipe} from '@angular/common';
+import {map, Observable, startWith} from 'rxjs';
+import {User} from '../interface/User';
 
 
 @Component({
@@ -14,7 +24,13 @@ import {FormButtonsComponent} from '../form-buttons/form-buttons.component';
     MatDialogContent,
     MatDialogTitle,
     FormButtonsComponent,
-    MatLabel
+    MatLabel,
+    MatCheckbox,
+    ReactiveFormsModule,
+    MatAutocompleteTrigger,
+    MatAutocomplete,
+    MatOption,
+    AsyncPipe
   ],
   templateUrl: './popup-form.component.html',
   styleUrl: './popup-form.component.css',
@@ -24,17 +40,51 @@ export class PopupFormComponent implements OnInit{
   readonly popupFormRef = inject(MatDialogRef<PopupFormComponent, FormData>);
   readonly formData = inject<FormData>(MAT_DIALOG_DATA);
 
-  formValues: Record<string, string> = {};
+  formValues: Record<string, any> = {};
   firstAction = () => this.close();
   secondAction = () => this.submit();
-
+  formControl = new FormControl('');
+  filteredOptions: Observable<User[]> = new Observable<User[]>();
+  userList: User[] = [];
 
   ngOnInit() {
     for (const input of this.formData.formInputs) {
       const value = input.defaultValue;
-      this.formValues[input.field] =
-        value instanceof Date ? value.toLocaleDateString('en-CA') : value?.toString() ?? '';
+      if (input.checkbox === true) {
+        this.formValues[input.field] = !!value
+      }else if (input.selectList) {
+          input.selectList.subscribe(users => {
+            this.userList = users;
+            this.filteredOptions = this.formControl.valueChanges.pipe(
+              startWith(''),
+              map(value => typeof value === 'string' ? value : this.userDisplay(value || '')),
+              map(name => this.filterUsers(name))
+            )
+          }
+          )
+
+      } else {
+        this.formValues[input.field] =
+          value instanceof Date ? value.toLocaleDateString('en-CA') : value?.toString() ?? '';
+      }
     }
+  }
+  private filterUsers(name: string): User[] {
+    const filterValue = name.toLowerCase();
+    return this.userList.filter(user =>
+      (user.firstName + ' ' + user.lastName).toLowerCase().includes(filterValue)
+    );
+  }
+
+  userDisplay(value: User | string): string {
+    if (typeof value === 'string') {
+      return value;
+    }
+    return value ? `${value.firstName} ${value.lastName}` : '';
+  }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent, field: string) {
+    this.formValues[field] = event.option.value;
   }
 
   close() {
@@ -43,6 +93,7 @@ export class PopupFormComponent implements OnInit{
   submit() {
     this.popupFormRef.close(this.formValues);
   }
+
 }
 export interface FormData {
   header: string,
@@ -53,6 +104,9 @@ export interface FormInput {
   name: string,
   field: string,
   type: string,
-  defaultValue?: string | Date | number
+  select?: boolean,
+  selectList?: Observable<any[]>,
+  checkbox?: boolean
+  defaultValue?: string | Date | number | User
   readonly?: boolean
 }

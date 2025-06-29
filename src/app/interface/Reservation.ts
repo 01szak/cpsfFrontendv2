@@ -1,11 +1,9 @@
-import {Guest} from './Guest';
-import {CamperPlace} from './CamperPlace';
+import {User} from './User';
 
 export  interface Reservation {
-  checkin: Date;
-  checkout: Date;
-  guestFirstName: string;
-  guestLastName: string;
+  checkin: string;
+  checkout: string;
+  user: User
   camperPlaceIndex: string;
   price: number;
   isPaid: boolean;

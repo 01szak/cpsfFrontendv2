@@ -19,7 +19,7 @@ export class ReservationHelper {
 
         reservations.forEach(r => {
           const key = r.camperPlaceIndex;
-          const dates = this.getDatesBetween(r.checkin, r.checkout);
+          const dates = this.getDatesBetween(this.mapStringToDate(r.checkin), this.mapStringToDate(r.checkout));
 
           if (!reservationMap.has(key)) {
             reservationMap.set(key, new Set<string>());
@@ -48,4 +48,12 @@ export class ReservationHelper {
 
     return dates;
   }
+  mapStringToDate(text: string): Date {
+    const year: number = Number(text.slice(0,4));
+    const month: number = Number(text.slice(5,7));
+    const day: number = Number(text.slice(8,10));
+
+    return new Date(year, month - 1, day )
+  }
+
 }

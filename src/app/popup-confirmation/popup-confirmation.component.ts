@@ -21,6 +21,7 @@ export class PopupConfirmationComponent {
   close() {
     this.popupConfirmationRef.close();
   }
+
 }
 
 export interface ConfirmationData {

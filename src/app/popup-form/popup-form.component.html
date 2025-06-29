@@ -1,13 +1,42 @@
 <h1 mat-dialog-title>{{formData.header}}</h1>
 <mat-dialog-content>
   @for (formInput of formData.formInputs; track formInput) {
-    <mat-form-field>
-      <mat-label>{{formInput.name}}</mat-label>
-      <input matInput
-             type="{{formInput.type}}"
-             [(ngModel)]="formValues[formInput.field]"
-              [readonly]="formInput.readonly ?? false">
-    </mat-form-field>
+    @if (formInput.checkbox) {
+      <mat-checkbox
+        (change)="formValues[formInput.field] = !!formValues[formInput.field]"
+        [(ngModel)]="formValues[formInput.field]"
+        >
+        {{formInput.name}}
+      </mat-checkbox>
+    } @else if (!formInput.select) {
+      <mat-form-field>
+        <mat-label>{{formInput.name}}</mat-label>
+        <input matInput
+               type="{{formInput.type}}"
+               [(ngModel)]="formValues[formInput.field]"
+               [readonly]="formInput.readonly ?? false">
+      </mat-form-field>
+    } @else {
+      <mat-form-field>
+        <mat-label>{{formInput.name}}</mat-label>
+        <input matInput
+          type="{{formInput.type}}"
+          [formControl]="formControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete
+          autoActiveFirstOption
+          #auto=matAutocomplete
+          [displayWith]="userDisplay"
+          (optionSelected)="onOptionSelected($event, formInput.field)">
+          @for (option of filteredOptions | async; track option) {
+              <mat-option [value]="option">
+<!--                {{element.firstName + " " + element.lastName }}-->
+                    {{option.firstName + " " + option.lastName}}
+              </mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    }
   }
   <app-form-buttons
     [firstAction]="firstAction"
