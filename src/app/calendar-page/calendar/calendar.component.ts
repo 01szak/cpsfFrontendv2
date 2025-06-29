@@ -1,11 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {CamperPlace} from '../../interface/CamperPlace';
 import {CamperPlaceService} from '../../service/CamperPlaceService';
 import {AsyncPipe, NgClass} from '@angular/common';
 import {MatCard} from '@angular/material/card';
 import {DatePickerComponent} from '../date-picker/date-picker.component';
-import {ReservationHelperService} from '../../service/ReservationHelperService';
+import {ReservationHelper} from '../../service/ReservationHelper';
+import {PopupFormService} from '../../service/PopupFormService';
 
 @Component({
   selector: 'app-calendar',
@@ -13,11 +14,12 @@ import {ReservationHelperService} from '../../service/ReservationHelperService';
     AsyncPipe,
     MatCard,
     DatePickerComponent,
-    NgClass
+    NgClass,
   ],
   templateUrl: './calendar.component.html',
   standalone: true,
-  styleUrl: './calendar.component.css'
+  styleUrl: './calendar.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
   weekDays: string[] = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
@@ -25,12 +27,14 @@ export class CalendarComponent implements OnInit {
   @Input() month: number = new Date().getMonth();
   @Input() year: number = new Date().getFullYear();
   camperPlaces$: Observable<CamperPlace[]>;
-  reservationMap = new Map<string,Set<string>>
+  reservationMap = new Map<string,Set<string>>;
+
   constructor(
-    camperPlaceService: CamperPlaceService,
-    private rHelper: ReservationHelperService
+    private camperPlaceService: CamperPlaceService,
+    private rHelper: ReservationHelper,
+    protected popupFormService: PopupFormService,
   ) {
-    this.camperPlaces$ = camperPlaceService.getCamperPlaces();
+    this.camperPlaces$ = this.camperPlaceService.getCamperPlaces();
   }
 
   ngOnInit(): void {
@@ -68,6 +72,22 @@ export class CalendarComponent implements OnInit {
     }
     return reservedDays.has(new Date(year, month, day).toDateString());
   }
+  isCheckin(year: number, month: number, day: number, camperPlace: CamperPlace) {
+    const reservedDays = this.reservationMap!.get(camperPlace.index.toString());
+    if (!reservedDays) {
+      return false;
+    }
+    return !reservedDays.has(new Date(year, month, day - 1).toDateString()) && this.isDayReserved(year, month, day, camperPlace);
+  }
+  isCheckout(year: number, month: number, day: number, camperPlace: CamperPlace) {
+    const reservedDays = this.reservationMap!.get(camperPlace.index.toString());
+    if (!reservedDays) {
+      return false;
+    }
+    return !reservedDays.has(new Date(year, month, day + 1).toDateString()) && this.isDayReserved(year, month, day, camperPlace);
+  }
 
+
+  protected readonly Date = Date;
 }
 

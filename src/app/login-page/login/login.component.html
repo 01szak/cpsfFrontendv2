@@ -15,8 +15,13 @@
             <mat-hint>Login lub hasło są nie poprawne</mat-hint>
           }
         </mat-form-field>
-        <div class="buttons">
-          <button mat-stroked-button (click)="change()">Zarejestruj</button>
-          <button class="login" mat-flat-button (click)="authenticate()">Zaloguj</button>
-        </div>
+<!--        <div class="buttons">-->
+<!--          <button mat-stroked-button (click)="change()">Zarejestruj</button>-->
+<!--          <button class="login" mat-flat-button (click)="authenticate()">Zaloguj</button>-->
+<!--        </div>-->
+        <app-form-buttons
+          [firstButtonText]="'Zarejestruj'"
+          [secondButtonText]="'Zaloguj'"
+          [firstAction]="firstAction"
+          [secondAction]="secondAction"></app-form-buttons>
       </div>

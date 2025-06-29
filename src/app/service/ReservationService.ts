@@ -15,4 +15,7 @@ export class ReservationService {
     return this.http.get<Reservation[]>(this.api + 'getAll');
   }
 
+  createReservation(result: any) {
+      console.log("dodalem rezerwacje")
+  }
 }

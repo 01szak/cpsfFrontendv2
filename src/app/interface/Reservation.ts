@@ -9,6 +9,4 @@ export  interface Reservation {
   camperPlaceIndex: string;
   price: number;
   isPaid: boolean;
-  isChecked: boolean;
-  note: string;
  }

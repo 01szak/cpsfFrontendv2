@@ -26,7 +26,6 @@ td {
 }
 .data:hover {
   cursor: pointer;
-  background-color: #a3fab9;
 }
 .cell {
   width: 50%;
@@ -75,5 +74,14 @@ app-date-picker {
   padding-right: 20px;
 }
 .reserved {
-  background-color: red;
+  background-color: #fdc098 ;
+}
+.nextToCheckin, .nextToCheckout {
+  background-color:#beffd0;
+}
+.left:hover{
+border-right: solid black 1px;
+}
+ .right:hover {
+border-left: solid black 1px;
 }

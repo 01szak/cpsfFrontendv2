@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatHint, MatInput, MatLabel} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
+import {FormButtonsComponent} from '../../form-buttons/form-buttons.component';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import {MatButton} from '@angular/material/button';
     MatLabel,
     MatHint,
     MatInput,
-    MatButton
+    MatButton,
+    FormButtonsComponent
   ],
   templateUrl: './register.component.html',
   standalone: true,
@@ -26,6 +28,9 @@ export class RegisterComponent {
     password: "",
     repeatedPassword:  ""
   };
+
+  firstAction = () => this.change();
+
 
   @Output() changeTemplate = new EventEmitter<boolean>();
   change() {

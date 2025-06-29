@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatFormField, MatHint, MatInput, MatLabel} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
+import {FormButtonsComponent} from '../../form-buttons/form-buttons.component';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import {MatButton} from '@angular/material/button';
     MatHint,
     MatButton,
     MatInput,
+    FormButtonsComponent,
   ],
   templateUrl: './login.component.html',
   standalone: true,
@@ -21,6 +23,10 @@ export class LoginComponent {
   user: { login: string, password: string } = {
     login: "test", password: "test"
   };
+
+  firstAction = () => this.change();
+  secondAction = () => this.authenticate();
+
 
   login: string = "";
   password: string = "";

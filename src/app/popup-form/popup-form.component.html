@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{formData.header}}</h1>
+<mat-dialog-content>
+  @for (formInput of formData.formInputs; track formInput) {
+    <mat-form-field>
+      <mat-label>{{formInput.name}}</mat-label>
+      <input matInput
+             type="{{formInput.type}}"
+             [(ngModel)]="formValues[formInput.field]"
+              [readonly]="formInput.readonly ?? false">
+    </mat-form-field>
+  }
+  <app-form-buttons
+    [firstAction]="firstAction"
+    [secondAction]="secondAction">
+  </app-form-buttons>
+</mat-dialog-content>

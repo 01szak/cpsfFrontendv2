@@ -26,8 +26,12 @@
             <mat-hint>{{ register().m1 }}</mat-hint>
           }
         </mat-form-field>
-        <div class="buttons">
-          <button mat-flat-button (click)="change()">Zaloguj</button>
-          <button class="login" mat-stroked-button>Wyślij</button>
-        </div>
+<!--        <div class="buttons">-->
+<!--          <button mat-flat-button (click)="change()">Zaloguj</button>-->
+<!--          <button class="login" mat-stroked-button>Wyślij</button>-->
+<!--        </div>-->
+        <app-form-buttons
+          [firstButtonText]="'Zaloguj'"
+          [firstAction]="firstAction"
+          ></app-form-buttons>
       </div>

@@ -16,5 +16,4 @@ import {MatCard} from '@angular/material/card';
   styleUrl: './calendar-page.component.css'
 })
 export class CalendarPageComponent {
-  isCalendarFullSize: boolean = false;
 }

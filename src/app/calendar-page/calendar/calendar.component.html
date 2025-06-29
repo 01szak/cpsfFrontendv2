@@ -18,12 +18,22 @@
             <th>{{camperPlace.index}}</th>
             @for (day of days; track day) {
               <td>
-                <div [ngClass]="{
+                <div  #data [ngClass]="{
                 'data': true,
                 'reserved': isDayReserved(year, month, day, camperPlace)
-                }" >
-                  <div class="cell left"></div>
-                  <div class="cell right"></div>
+                }">
+                  <div #left
+                    [ngClass]="{
+                      'cell': true,
+                      'left': true,
+                      'nextToCheckout':isCheckin(year, month, day, camperPlace),
+                    }"></div>
+                  <div #right
+                     [ngClass]="{
+                      'cell': true,
+                      'right': true,
+                      'nextToCheckin':  isCheckout(year, month, day, camperPlace),
+                    }" (click)="popupFormService.openCreateReservationFormPopup(year, month, day,camperPlace.index)"></div>
                 </div>
               </td>
             }
@@ -33,3 +43,4 @@
     </table>
   </div>
 </mat-card>
+

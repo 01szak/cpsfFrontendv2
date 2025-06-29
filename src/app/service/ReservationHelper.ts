@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {Reservation} from '../interface/Reservation';
 
 @Injectable({providedIn: "root"})
-export class ReservationHelperService {
+export class ReservationHelper {
 
   reservations$: Observable<Reservation[]>;
   reservationMap$: Observable<Map<string, Set<string>>>;
@@ -46,7 +46,6 @@ export class ReservationHelperService {
       start.setDate(start.getDate() + 1);
     }
 
-    console.log(dates);
     return dates;
   }
 }
