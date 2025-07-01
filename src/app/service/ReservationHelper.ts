@@ -2,6 +2,7 @@ import {map, Observable, shareReplay, take} from 'rxjs';
 import {ReservationService} from './ReservationService';
 import {Injectable} from '@angular/core';
 import {Reservation} from '../interface/Reservation';
+import {ReservationMetadata, ReservationMetadataWithSets} from '../interface/ReservationMetadata';
 
 @Injectable({providedIn: "root"})
 export class ReservationHelper {
@@ -55,5 +56,17 @@ export class ReservationHelper {
 
     return new Date(year, month - 1, day )
   }
+   mapReservationMetadataToSets(rawMap: Record<string, ReservationMetadata>): Record<string, ReservationMetadataWithSets> {
+    const mapped: Record<string, ReservationMetadataWithSets> = {};
 
+    for (const key in rawMap) {
+      const raw = rawMap[key];
+      mapped[key] = {
+        reserved: new Set(raw.reserved),
+        checkin: new Set(raw.checkin),
+        checkout: new Set(raw.checkout)
+      };
+    }
+    return mapped;
+  }
 }

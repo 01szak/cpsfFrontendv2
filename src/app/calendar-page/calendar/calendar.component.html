@@ -13,27 +13,27 @@
   <div class="table-scroll">
     <table>
     <tbody>
-        @for (camperPlace of camperPlaces$ | async; track reservationMap) {
+        @for (camperPlace of camperPlaces$ | async; track camperPlace) {
           <tr>
             <th>{{camperPlace.index}}</th>
             @for (day of days; track day) {
               <td>
                 <div  #data [ngClass]="{
                 'data': true,
-                'reserved': isDayReserved(year, month, day, camperPlace)
+                'reserved': isDayReserved(year, month , day, camperPlace)
                 }">
                   <div #left
                     [ngClass]="{
                       'cell': true,
                       'left': true,
-                      'nextToCheckout':isCheckin(year, month, day, camperPlace),
-                    }"></div>
+                      'nextToCheckin':isCheckin(year, month, day , camperPlace),
+                    }" (click)="openFormPopup(year, month , day, camperPlace, $event)"></div>
                   <div #right
                      [ngClass]="{
                       'cell': true,
                       'right': true,
-                      'nextToCheckin':  isCheckout(year, month, day, camperPlace),
-                    }" (click)="popupFormService.openCreateReservationFormPopup(year, month, day,camperPlace.index)"></div>
+                      'nextToCheckout':isCheckout(year, month, day, camperPlace),
+                    }" (click)="openFormPopup(year, month , day, camperPlace, $event)"></div>
                 </div>
               </td>
             }

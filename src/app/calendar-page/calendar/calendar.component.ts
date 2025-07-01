@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, ElementRef,
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges, ViewChild
 } from '@angular/core';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {CamperPlace} from '../../interface/CamperPlace';
 import {CamperPlaceService} from '../../service/CamperPlaceService';
 import {AsyncPipe, NgClass} from '@angular/common';
@@ -15,6 +15,8 @@ import {MatCard} from '@angular/material/card';
 import {DatePickerComponent} from '../date-picker/date-picker.component';
 import {ReservationHelper} from '../../service/ReservationHelper';
 import {PopupFormService} from '../../service/PopupFormService';
+import {ReservationService} from '../../service/ReservationService';
+import {ReservationMetadata, ReservationMetadataWithSets} from '../../interface/ReservationMetadata';
 
 @Component({
   selector: 'app-calendar',
@@ -35,23 +37,25 @@ export class CalendarComponent implements OnInit, OnChanges {
   @Input() month: number = new Date().getMonth();
   @Input() year: number = new Date().getFullYear();
   camperPlaces$: Observable<CamperPlace[]>;
-  reservationMap = new Map<string,Set<string>>;
-
+  reservationMetadataWithSets: Record<string, ReservationMetadataWithSets> = {};
   constructor(
     private camperPlaceService: CamperPlaceService,
-    private rHelper: ReservationHelper,
     protected popupFormService: PopupFormService,
-    private cdr: ChangeDetectorRef,
+    private reservationService: ReservationService,
+    private reservationHelper: ReservationHelper,
   ) {
     this.camperPlaces$ = this.camperPlaceService.getCamperPlaces();
   }
 
   ngOnInit(): void {
     this.generateDays()
+    this.reservationService.getReservationMetadata().subscribe(r => {
+      console.log(r)
+        this.reservationMetadataWithSets = this.reservationHelper.mapReservationMetadataToSets(r);
 
-    this.rHelper.reservationMap$.subscribe(rm => {
-      this.reservationMap = new Map(rm);
-    });
+    }
+    )
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -80,29 +84,39 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.days.push(i);
     }
   }
+
   isDayReserved(year: number, month: number, day: number, camperPlace: CamperPlace) {
-    const reservedDays = this.reservationMap!.get(camperPlace.index.toString());
-    if (!reservedDays) {
-      return false;
-    }
-    return reservedDays.has(new Date(year, month, day).toDateString());
+    const dateStr = this.formatDate(year, month, day);
+    return this.reservationMetadataWithSets[camperPlace.index]?.reserved.has(dateStr);
   }
+
   isCheckin(year: number, month: number, day: number, camperPlace: CamperPlace) {
-    const reservedDays = this.reservationMap!.get(camperPlace.index.toString());
-    if (!reservedDays) {
-      return false;
-    }
-    return !reservedDays.has(new Date(year, month, day - 1).toDateString()) && this.isDayReserved(year, month, day, camperPlace);
+    const dateStr = this.formatDate(year, month, day);
+    return this.reservationMetadataWithSets[camperPlace.index]?.checkin.has(dateStr);
   }
+
   isCheckout(year: number, month: number, day: number, camperPlace: CamperPlace) {
-    const reservedDays = this.reservationMap!.get(camperPlace.index.toString());
-    if (!reservedDays) {
-      return false;
-    }
-    return !reservedDays.has(new Date(year, month, day + 1).toDateString()) && this.isDayReserved(year, month, day, camperPlace);
+    const dateStr = this.formatDate(year, month, day);
+    return this.reservationMetadataWithSets[camperPlace.index]?.checkout.has(dateStr);
   }
 
+  formatDate(year: number, month: number, day: number): string {
+    return new Date(Date.UTC(year, month, day)).toISOString().slice(0, 10);
+  }
 
-  protected readonly Date = Date;
+  openFormPopup(year: number, month: number, day: number, camperPlace: CamperPlace, event: MouseEvent) {
+    const  target = event.target as HTMLElement
+
+    if(target.classList.contains('nextToCheckout')) {
+       this.popupFormService.openCreateReservationFormPopup(camperPlace, year, month, day);
+     } else {
+      if (this.isDayReserved(year, month, day, camperPlace)) {
+        this.popupFormService.openUpdateReservationFormPopup(camperPlace, year, month, day);
+      } else {
+        this.popupFormService.openCreateReservationFormPopup(camperPlace, year, month, day);
+      }
+    }
+
+  }
 }
 
