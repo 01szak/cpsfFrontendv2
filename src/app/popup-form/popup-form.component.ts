@@ -13,6 +13,8 @@ import {
 import {AsyncPipe} from '@angular/common';
 import {map, Observable, startWith} from 'rxjs';
 import {User} from '../interface/User';
+import {PopupConfirmationService} from '../service/PopupConfirmationService';
+import {ReservationService} from '../service/ReservationService';
 
 
 @Component({
@@ -39,6 +41,11 @@ import {User} from '../interface/User';
 export class PopupFormComponent implements OnInit{
   readonly popupFormRef = inject(MatDialogRef<PopupFormComponent, FormData>);
   readonly formData = inject<FormData>(MAT_DIALOG_DATA);
+  constructor(
+    protected popupConfirmationService: PopupConfirmationService,
+    protected reservationService: ReservationService
+  ) {
+  }
 
   formValues: Record<string, any> = {};
   firstAction = () => this.close();
@@ -97,6 +104,8 @@ export class PopupFormComponent implements OnInit{
 }
 export interface FormData {
   header: string,
+  update?: boolean,
+  objectToUpdate?: any
   formInputs: FormInput[],
 }
 

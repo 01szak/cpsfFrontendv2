@@ -34,4 +34,12 @@ export class ReservationService {
     });
   }
 
+  deleteReservation(reservation: Reservation): () => void {
+    return () => {
+      this.http.delete(this.api + 'deleteReservation/' + reservation.id!.toString()).subscribe(() => {
+        window.location.reload();
+      });
+    };
+  }
+
 }

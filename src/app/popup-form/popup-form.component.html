@@ -1,4 +1,12 @@
+@if (formData.update) {
+  <div class="deleteIcon">
+    <i (click)="popupConfirmationService.openConfirmationPopup(
+    'Rezerwacja zostanie usunięta. Czy chcesz kontynuować?',
+    reservationService.deleteReservation(formData.objectToUpdate))" class="fa-regular fa-trash-can"></i>
+  </div>
+    }
 <h1 mat-dialog-title>{{formData.header}}</h1>
+
 <mat-dialog-content>
   @for (formInput of formData.formInputs; track formInput) {
     @if (formInput.checkbox) {

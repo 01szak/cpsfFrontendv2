@@ -81,6 +81,8 @@ export class PopupFormService {
     const user: User = reservationToUpdate.user;
     const formData: FormData = {
       header: 'Edycja Rezerwacji',
+      update: true,
+      objectToUpdate: reservationToUpdate,
       formInputs: [
         { name: 'Data wjazdu', field: 'checkin', type: 'date', defaultValue: reservationToUpdate.checkin},
         { name: 'Data wyjazdu', field: 'checkout', type: 'date', defaultValue: reservationToUpdate.checkout},
