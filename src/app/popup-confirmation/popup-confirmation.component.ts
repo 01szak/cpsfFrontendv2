@@ -18,6 +18,7 @@ export class PopupConfirmationComponent {
 
   firstAction = () => this.close();
   secondAction = () => {this.confirmationData.action(); this.firstAction()}
+
   close() {
     this.popupConfirmationRef.close();
   }

@@ -6,7 +6,6 @@ mat-dialog-content {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 10px;
 }
 .deleteIcon {
   display: flex;
@@ -24,3 +23,6 @@ i:hover {
   color: red;
 }
 
+app-form-buttons {
+ padding: 10px;
+}

@@ -20,18 +20,21 @@
               <td>
                 <div  #data [ngClass]="{
                 'data': true,
-                'reserved': isDayReserved(year, month , day, camperPlace)
+                'dataCheckin':isCheckin(year, month, day , camperPlace),
+                'dataCheckout':isCheckout(year, month, day, camperPlace),
                 }">
                   <div #left
                     [ngClass]="{
                       'cell': true,
                       'left': true,
+                      'reserved': isDayReserved(year, month , day, camperPlace),
                       'nextToCheckin':isCheckin(year, month, day , camperPlace),
                     }" (click)="openFormPopup(year, month , day, camperPlace, $event)"></div>
                   <div #right
                      [ngClass]="{
                       'cell': true,
                       'right': true,
+                      'reserved': isDayReserved(year, month , day, camperPlace),
                       'nextToCheckout':isCheckout(year, month, day, camperPlace),
                     }" (click)="openFormPopup(year, month , day, camperPlace, $event)"></div>
                 </div>

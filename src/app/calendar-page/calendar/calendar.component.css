@@ -77,11 +77,20 @@ app-date-picker {
   background-color: #fdc098 ;
 }
 .nextToCheckin, .nextToCheckout {
-  background-color:#beffd0;
+  background-color: transparent   ;
 }
 .left:hover{
 border-right: solid black 1px;
 }
  .right:hover {
 border-left: solid black 1px;
+}
+.nextToCheckout {
+  border-left: solid black 1px;
+}
+.nextToCheckin {
+  border-right: solid black 1px;
+}
+ .data.dataCheckin.dataCheckout {
+  background-color: #fdc098 !important;
 }

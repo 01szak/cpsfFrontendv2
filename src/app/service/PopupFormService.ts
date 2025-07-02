@@ -31,7 +31,15 @@ export class PopupFormService {
         { name: 'Data wyjazdu', field: 'checkout', type: 'date'},
         { name: 'Numer parceli', field: 'camperPlaceIndex', type: 'text', defaultValue: camperPlace.index, readonly: camperPlace.index.length > 0},
         { name: 'Gość', field: 'user', type: 'text', select: true, selectList: this.users$},
-        { name: 'Zapłacone', field: 'isPaid', type: 'checkbox', checkbox: true},
+        { name: 'Imię', field: 'firstName', type: 'text', additional: true },
+        { name: 'Nazwisko', field: 'lastName', type: 'text', additional: true },
+        { name: 'Rejestracja', field: 'carRegistration', type: 'text', additional: true },
+        { name: 'Email', field: 'email', type: 'email', additional: true },
+        { name: 'Numer Telefonu', field: 'phoneNumber', type: 'tel', additional: true },
+        { name: 'Kraj', field: 'country', type: 'text', additional: true },
+        { name: 'Miasto', field: 'city', type: 'text', additional: true },
+        { name: 'Adres', field: 'streetAddress', type: 'text', additional: true },
+
       ]
     };
     const dialogRef = this.popupForm.open(PopupFormComponent, {
@@ -40,19 +48,30 @@ export class PopupFormService {
     dialogRef.afterOpened().subscribe(() => {
       dialogRef.componentInstance.secondAction = () => {
         const result = dialogRef.componentInstance.formValues;
-        console.log(result)
         this.popupConfirmationService.openConfirmationPopup(
           "Rezerwacja zostanie dodana. Czy chcesz kontynuować?",
 
           () => {
-            const reservationToCreate: Reservation = {
-              camperPlaceIndex: result['camperPlaceIndex'].toString(),
-              checkin: result['checkin'].toString(),
-              checkout: result['checkout'].toString(),
-              isPaid: !!result['isPaid'],
-              price: 0,
-              user: result['user'],
+            const userToCreate: User = {
+              firstName: result['firstName']?.toString() ?? '',
+              lastName: result['lastName']?.toString() ?? '',
+              carRegistration: result['carRegistration']?.toString() ?? '',
+              email: result['email']?.toString() ?? '',
+              phoneNumber: result['phoneNumber']?.toString() ?? '',
+              country: result['country']?.toString() ?? '',
+              city: result['city']?.toString() ?? '',
+              streetAddress: result['street']?.toString() ?? '',
             }
+            const reservationToCreate: Reservation = {
+              isPaid: false,
+              camperPlaceIndex: result['camperPlaceIndex'].toString() ?? '',
+              checkin: result['checkin'].toString() ?? '',
+              checkout: result['checkout'].toString() ?? '',
+              price: 0,
+              user: result['isNewGuest'] ? userToCreate : result['user']
+            }
+
+            console.log(reservationToCreate)
 
             this.reservationService.createReservation(reservationToCreate);
             dialogRef.close();
@@ -66,6 +85,7 @@ export class PopupFormService {
 
   openUpdateReservationFormPopup(camperPlace: CamperPlace, year: number, month: number, day: number) {
     const date = new Date(year, month, day);
+
     const reservationToUpdate = camperPlace.reservations.find(
         r =>
             this.reservationHelper
@@ -74,11 +94,10 @@ export class PopupFormService {
                 this.reservationHelper.mapStringToDate(r.checkout))
               .some(d => d.getTime() === date.getTime())
     )
-    console.log(camperPlace)
+    console.log(reservationToUpdate)
     if (!reservationToUpdate) {
       return
     }
-    const user: User = reservationToUpdate.user;
     const formData: FormData = {
       header: 'Edycja Rezerwacji',
       update: true,
@@ -86,18 +105,24 @@ export class PopupFormService {
       formInputs: [
         { name: 'Data wjazdu', field: 'checkin', type: 'date', defaultValue: reservationToUpdate.checkin},
         { name: 'Data wyjazdu', field: 'checkout', type: 'date', defaultValue: reservationToUpdate.checkout},
-        { name: 'Numer Parceli', field: 'camperPlace', type: 'text', defaultValue: camperPlace.index},
+        { name: 'Numer Parceli', field: 'camperPlaceIndex', type: 'text', defaultValue: camperPlace.index},
         { name: 'Gość', field: 'user', type: 'text', defaultValue: reservationToUpdate.user.firstName + " " + reservationToUpdate.user.lastName, readonly: true},
       ]
     }
+    reservationToUpdate.checkin
     const dialogRef = this.popupForm.open(PopupFormComponent, {
       data: formData
     })
     dialogRef.afterOpened().subscribe(() => {
+
+
       dialogRef.componentInstance.secondAction = () => {
         const result = dialogRef.componentInstance.formValues;
-        result['user'] = user;
-        console.log(result)
+        reservationToUpdate.checkin = result['checkin']?.toString() ?? reservationToUpdate.checkin;
+        reservationToUpdate.checkout = result['checkout']?.toString() ?? reservationToUpdate.checkout;
+        reservationToUpdate.camperPlaceIndex = result['camperPlaceIndex']?.toString() ?? reservationToUpdate.camperPlaceIndex;
+        console.log(reservationToUpdate)
+
         this.popupConfirmationService.openConfirmationPopup(
           "Rezerwacja zostanie edytowana. Czy chcesz kontynuować?",
           () => {

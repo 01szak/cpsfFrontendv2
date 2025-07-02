@@ -41,11 +41,14 @@ import {ReservationService} from '../service/ReservationService';
 export class PopupFormComponent implements OnInit{
   readonly popupFormRef = inject(MatDialogRef<PopupFormComponent, FormData>);
   readonly formData = inject<FormData>(MAT_DIALOG_DATA);
+  showAdditionalInputs: boolean = true;
   constructor(
     protected popupConfirmationService: PopupConfirmationService,
-    protected reservationService: ReservationService
+     protected reservationService: ReservationService
   ) {
   }
+  formInputsStandard = this.formData.formInputs.filter(f => !f.additional);
+  formInputsAdditional = this.formData.formInputs.filter(f => f.additional);
 
   formValues: Record<string, any> = {};
   firstAction = () => this.close();
@@ -117,5 +120,6 @@ export interface FormInput {
   selectList?: Observable<any[]>,
   checkbox?: boolean
   defaultValue?: string | Date | number | User
-  readonly?: boolean
+  readonly?: boolean,
+  additional?: boolean
 }
